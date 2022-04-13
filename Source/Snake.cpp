@@ -5,7 +5,7 @@
 
 
 Snake* Snake::sInstance = nullptr;
-float Snake::kJointSize = 5.0f;
+float Snake::kSnakeSpeed = 2 * Snake::kHalfSize;
 
 //Private constructor for the singleton
 Snake::Snake() : mHead(new SnakeJoint(SCREEN_CENTRE)), mCurrentDirection(Direction::RIGHT), mHasEaten(false), mIsDead(false)
@@ -113,7 +113,7 @@ Snake* Snake::GetInstance()
 //Getter for constant joint size
 float Snake::GetJointSize()
 {
-	return kJointSize;
+	return kHalfSize;
 }
 
 //Set has eaten
