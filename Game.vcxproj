@@ -154,8 +154,11 @@
     <ClInclude Include="Include\Game.h" />
     <ClInclude Include="Include\Snake.h" />
     <ClInclude Include="Include\SnakeJoint.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Snake.cpp" />
