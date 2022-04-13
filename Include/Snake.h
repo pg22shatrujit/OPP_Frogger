@@ -23,8 +23,8 @@ public:
 private:
 	Snake(); //Private constructor for the singleton
 	static Snake* sInstance; //Static reference to the singleton instance
-	static const int kHalfSize = 50; //Static snake size
-	static float kSnakeSpeed;//Constant snake speed
+	static float kJointSize; //Static snake size
+	const float kSnakeSpeed = 10.0f; //Constant snake speed
 	bool mHasEaten; //If the snake has eaten and needs to grow
 	bool mIsDead; //If the snake is dead
 	SnakeJoint* mHead; //Reference to the snake's head

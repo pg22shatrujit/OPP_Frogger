@@ -2,14 +2,13 @@
 #include "Game.h"
 
 #define SCREEN_CENTRE exVector2(400, 300)
-#define STARTING_POSITION exVector2(400, 600 - kHalfSize)
 
 
 Snake* Snake::sInstance = nullptr;
-float Snake::kSnakeSpeed = 2 * kHalfSize;
+float Snake::kJointSize = 5.0f;
 
 //Private constructor for the singleton
-Snake::Snake() : mHead(new SnakeJoint(STARTING_POSITION)), mCurrentDirection(Direction::UP), mHasEaten(false), mIsDead(false)
+Snake::Snake() : mHead(new SnakeJoint(SCREEN_CENTRE)), mCurrentDirection(Direction::RIGHT), mHasEaten(false), mIsDead(false)
 {}
 
 //Delete to clear the snake joint's and the singleton instance
@@ -114,7 +113,7 @@ Snake* Snake::GetInstance()
 //Getter for constant joint size
 float Snake::GetJointSize()
 {
-	return kHalfSize;
+	return kJointSize;
 }
 
 //Set has eaten

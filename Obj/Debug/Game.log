@@ -1,0 +1,11 @@
+﻿  ObstacleFactory.cpp
+  Game.cpp
+C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\Source\Game.cpp(43,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Main.cpp
+  Obstacle.cpp
+  Snake.cpp
+  Generating Code...
+EngineX_d.lib(Engine.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineX_d.lib(Engine.obj)' or at 'C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\bin\EngineX.pdb'; linking object as if no debug info
+EngineX_d.lib(RenderPacket.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineX_d.lib(RenderPacket.obj)' or at 'C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\bin\EngineX.pdb'; linking object as if no debug info
+EngineX_d.lib(System.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineX_d.lib(System.obj)' or at 'C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\bin\EngineX.pdb'; linking object as if no debug info
+  Game.vcxproj -> C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\bin\Game.exe

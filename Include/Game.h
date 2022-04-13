@@ -48,7 +48,7 @@ private:
     float               mTimeFromUpdate; //Time since last update, so that we can update at intervals we define
     bool                mIsFoodDisplayed; //Whether the food is being displayed
     bool                mIsGameOver; //Whether the game is over or not
-    const float         kUpdateTime = 1.0f; //Time after which we update
+    const float         kUpdateTime = 0.125f; //Time after which we update
 
     //Const text to display messages
     const std::string   kGameOverText = "Your final score is: ";

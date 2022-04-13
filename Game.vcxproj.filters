@@ -24,10 +24,13 @@
     <ClInclude Include="Include\SnakeJoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Obstacle.h">
+    <ClInclude Include="Include\Obstacle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.h">
+    <ClInclude Include="Include\Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObstacleFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,7 +47,10 @@
     <ClCompile Include="Source\SnakeJoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Obstacle.cpp">
+    <ClCompile Include="Source\Obstacle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstacleFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
