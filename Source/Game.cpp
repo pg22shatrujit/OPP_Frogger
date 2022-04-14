@@ -164,11 +164,13 @@ void Game::Update(const float& deltaTime) {
         move = false;
     }
 
+    //Check if player has reached the top of the screen and increase score, score will only increase at the top once the player goes to the bottom and comes back up
     if (mSnake->GetHead()->GetPosition().y == Snake::GetJointSize() && GoingDown == false) {
         mScore += 1;
         GoingDown = true;
     }
 
+    //check if player has reached the bottom of the screen and increase score only if they have made it to the top first
     if (mSnake->GetHead()->GetPosition().y == 600 - Snake::GetJointSize() && GoingDown == true) {
         mScore += 1;
         GoingDown = false;
