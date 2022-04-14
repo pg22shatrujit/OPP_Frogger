@@ -1,14 +1,14 @@
 #include "Snake.h"
 #include "Game.h"
 
-#define SCREEN_CENTRE exVector2(400, 300)
+#define SCREEN_SPAWN exVector2(400, 580)
 
 
 Snake* Snake::sInstance = nullptr;
 float Snake::kSnakeSpeed = 2 * Snake::kHalfSize;
 
 //Private constructor for the singleton
-Snake::Snake() : mHead(new SnakeJoint(SCREEN_CENTRE)), mCurrentDirection(Direction::RIGHT), mHasEaten(false), mIsDead(false)
+Snake::Snake() : mHead(new SnakeJoint(SCREEN_SPAWN)), mCurrentDirection(Direction::RIGHT),  mIsDead(false)
 {}
 
 //Delete to clear the snake joint's and the singleton instance
@@ -53,7 +53,7 @@ Snake::~Snake()
 void Snake::Update()
 {
 	exVector2 newPosition;
-
+	
 	//Check direction and calculate new head position
 	switch (mCurrentDirection)
 	{
@@ -72,11 +72,11 @@ void Snake::Update()
 	}
 
 	//If the new position is outside the screen, move it to the other side
-	if (newPosition.x < 0) newPosition.x += 800;
-	else if (newPosition.x > 800) newPosition.x -= 800;
+	if (newPosition.x < 0) newPosition.x += kSnakeSpeed;
+	else if (newPosition.x > 800) newPosition.x -= kSnakeSpeed;
 
-	if (newPosition.y < 0) newPosition.y += 600;
-	else if (newPosition.y > 600) newPosition.y -= 600;
+	if (newPosition.y < 0) newPosition.y += kSnakeSpeed;
+	else if (newPosition.y > 600) newPosition.y -= kSnakeSpeed;
 
 	//Check if it dies at the new position
 	CheckForDeath(newPosition);
@@ -88,12 +88,6 @@ void Snake::Update()
 			exVector2 tempPosition = currentJoint->GetPosition();
 			currentJoint->SetPosition(newPosition);
 			newPosition = tempPosition;
-
-			//If we're at the last joint and the snake has eaten, create a new joint
-			if (currentJoint->next == nullptr && mHasEaten) {
-				currentJoint->next = new SnakeJoint(currentJoint->GetPosition());
-				mHasEaten = false;
-			}
 
 			currentJoint = currentJoint->next;
 		}
@@ -116,11 +110,6 @@ float Snake::GetJointSize()
 	return kHalfSize;
 }
 
-//Set has eaten
-void Snake::Eat()
-{
-	mHasEaten = true;
-}
 
 //Getter for mIsDead
 bool Snake::GetIsDead() const
@@ -143,32 +132,7 @@ Direction Snake::GetDirection() const
 //Setter for mCurrentDirection
 void Snake::SetDirection(Direction newDirection)
 {
-	//Check that the new direction is not 180deg from the old one
-	switch (newDirection)
-	{
-	case Direction::UP:
-		if (mCurrentDirection != Direction::DOWN) {
-			mCurrentDirection = newDirection;
-		}
-		break;
-	case Direction::DOWN:
-		if (mCurrentDirection != Direction::UP) {
-			mCurrentDirection = newDirection;
-		}
-		break;
-	case Direction::LEFT:
-		if (mCurrentDirection != Direction::RIGHT) {
-			mCurrentDirection = newDirection;
-		}
-		break;
-	case Direction::RIGHT:
-		if (mCurrentDirection != Direction::LEFT) {
-			mCurrentDirection = newDirection;
-		}
-		break;
-	default:
-		break;
-	}
+	mCurrentDirection = newDirection;
 }
 
 //Check if the snake collides with itself

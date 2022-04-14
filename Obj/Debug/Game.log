@@ -1,6 +1,3 @@
 ﻿  Game.cpp
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\Source\Game.cpp(43,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Main.cpp
-  Snake.cpp
-  Generating Code...
-  Game.vcxproj -> C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\bin\Game.exe
+C:\Users\PG22andre\Documents\OPP_Frogger\Source\Game.cpp(45,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Game.vcxproj -> C:\Users\PG22andre\Documents\OPP_Frogger\bin\Game.exe
