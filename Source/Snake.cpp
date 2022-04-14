@@ -2,13 +2,14 @@
 #include "Game.h"
 
 #define SCREEN_CENTRE exVector2(400, 300)
+#define STARTING_POSITION exVector2(400, 600 - Snake::kHalfSize)
 
 
 Snake* Snake::sInstance = nullptr;
 float Snake::kSnakeSpeed = 2 * Snake::kHalfSize;
 
 //Private constructor for the singleton
-Snake::Snake() : mHead(new SnakeJoint(SCREEN_CENTRE)), mCurrentDirection(Direction::RIGHT), mHasEaten(false), mIsDead(false)
+Snake::Snake() : mHead(new SnakeJoint(STARTING_POSITION)), mCurrentDirection(Direction::RIGHT), mHasEaten(false), mIsDead(false)
 {}
 
 //Delete to clear the snake joint's and the singleton instance
@@ -143,32 +144,7 @@ Direction Snake::GetDirection() const
 //Setter for mCurrentDirection
 void Snake::SetDirection(Direction newDirection)
 {
-	//Check that the new direction is not 180deg from the old one
-	switch (newDirection)
-	{
-	case Direction::UP:
-		if (mCurrentDirection != Direction::DOWN) {
-			mCurrentDirection = newDirection;
-		}
-		break;
-	case Direction::DOWN:
-		if (mCurrentDirection != Direction::UP) {
-			mCurrentDirection = newDirection;
-		}
-		break;
-	case Direction::LEFT:
-		if (mCurrentDirection != Direction::RIGHT) {
-			mCurrentDirection = newDirection;
-		}
-		break;
-	case Direction::RIGHT:
-		if (mCurrentDirection != Direction::LEFT) {
-			mCurrentDirection = newDirection;
-		}
-		break;
-	default:
-		break;
-	}
+	mCurrentDirection = newDirection;
 }
 
 //Check if the snake collides with itself

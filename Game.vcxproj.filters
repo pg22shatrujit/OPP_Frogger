@@ -33,6 +33,12 @@
     <ClInclude Include="ObstacleFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ObstaclePool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RowManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Game.cpp">
@@ -51,6 +57,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ObstacleFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstaclePool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RowManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

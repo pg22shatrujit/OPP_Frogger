@@ -93,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Include\;EngineX\Include;EngineX\Dependencies\SDL\SDL2-2.0.3\include;EngineX\Dependencies\SDL\SDL2_ttf-2.0.12;EngineX\Dependencies\SDL\SDL2_gfx-1.0.1;EngineX\Dependencies\SDL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>\;Include\;EngineX\Include;EngineX\Dependencies\SDL\SDL2-2.0.3\include;EngineX\Dependencies\SDL\SDL2_ttf-2.0.12;EngineX\Dependencies\SDL\SDL2_gfx-1.0.1;EngineX\Dependencies\SDL</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -157,9 +157,13 @@
     <ClInclude Include="Include\SnakeJoint.h" />
     <ClInclude Include="Include\Utils.h" />
     <ClInclude Include="ObstacleFactory.h" />
+    <ClInclude Include="ObstaclePool.h" />
+    <ClInclude Include="RowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ObstacleFactory.cpp" />
+    <ClCompile Include="ObstaclePool.cpp" />
+    <ClCompile Include="RowManager.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Obstacle.cpp" />

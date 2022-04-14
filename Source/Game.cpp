@@ -39,8 +39,12 @@ Game::Game()
     , mIsFoodDisplayed(false)
     , mIsGameOver(false)
     , mScore(0)
+    , mUpdate(false)
 {
-    srand(time(NULL));
+
+    for (int i = 0; i < kNumRows; i++) {
+        mRows[i] = new RowManager(i, i % 2 == 0 ? (Direction)LEFT : (Direction)RIGHT);
+    }
 }
 
 Game::~Game()
@@ -108,24 +112,6 @@ void Game::Run(float deltaTime)
 
 }
 
-//Update the food location when it gets consumed
-void Game::UpdateFood()
-{
-    //If the food is not displayed, generate random locations until we get a valid one
-    while (!mIsFoodDisplayed) {
-        float x = GetRandomCoordinate(RIGHT_BOUND);
-        float y = GetRandomCoordinate(BOTTOM_BOUND);
-        exVector2 position = exVector2(x, y);
-
-        //If the position isn't contained by the snake, it's valid
-        if (!mSnake->ContainsPosition(position)) {
-            mFoodPosition = position;
-
-            mIsFoodDisplayed = true;
-        }
-    }
-}
-
 //Reset params for game restart
 void Game::RestartGame()
 {
@@ -141,6 +127,9 @@ void Game::ProcessInput(const float& deltaTime)
     //Snake movement input is only valid if game isn't over
     if (!mIsGameOver) {
         // Change scene based on input
+        if (mInput) {
+            mUpdate = true;
+        }
         if (mInput & UP)
         {
             mSnake->SetDirection((Direction)UP);
@@ -168,21 +157,18 @@ void Game::ProcessInput(const float& deltaTime)
 
 void Game::Update(const float& deltaTime) {
 
-    //Update snake's position and direction
-    mSnake->Update();
+    if (mUpdate) {
+        //Update snake's position and direction
+        mSnake->Update();
+        mUpdate = false;
+    }
+
+    for (int i = 0; i < kNumRows; i++) {
+        mRows[i]->Update();
+    }
 
     //Check if it died
     mIsGameOver = mSnake->GetIsDead();
-
-    //If it's at the food location -> consume, grow larger and increase score
-    if (mSnake->GetHead()->GetPosition() == mFoodPosition) {
-        mIsFoodDisplayed = false;
-        mSnake->Eat();
-        mScore++;
-    }
-
-    //Update food position
-    UpdateFood();
 }
 
 //Get a random coordinate between 0 and bound
@@ -194,6 +180,10 @@ float Game::GetRandomCoordinate(const float& bound) const
 
 void Game::Render(const float& deltaTime) const
 {
+    for (int i = 0; i < kNumRows; i++) {
+        mRows[i]->Render(mEngine);
+    }
+
     //Iterate over the snake's joints and draw them
     SnakeJoint* temp = mSnake->GetHead();
     while (temp != nullptr) {
@@ -205,8 +195,6 @@ void Game::Render(const float& deltaTime) const
         mEngine->DrawBox(p1, p2, BLACK, 1);
         temp = temp->next;
     }
-
-    mEngine->DrawCircle(mFoodPosition, mJointSize, BLACK, 1);
 
     mEngine->DrawText(mFontID, mScorePosition, std::to_string(mScore).c_str(), exColor(0, 0, 0), 10);
 }
