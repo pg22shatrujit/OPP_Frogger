@@ -11,6 +11,7 @@ public:
 	static float GetJointSize(); //Getter for static joint size
 	void Eat(); //Increase the snake's size when it eats
 	bool GetIsDead() const; //Getter for mIsDead
+	void SetIsDead(bool isDead); //Getter for mIsDead
 	SnakeJoint* GetHead() const; //Get ref to the snake's head
 
 	Direction GetDirection() const; //Getter for the snake's current direction

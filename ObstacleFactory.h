@@ -29,7 +29,7 @@ public:
 private:
 
 
-    ObstacleFactory();// constructor
+    ObstacleFactory();
 
     static ObstacleFactory* sInstance;
 };

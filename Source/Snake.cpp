@@ -129,6 +129,11 @@ bool Snake::GetIsDead() const
 	return mIsDead;
 }
 
+void Snake::SetIsDead(bool isDead)
+{
+	mIsDead = isDead;
+}
+
 //Getter for mHead
 SnakeJoint* Snake::GetHead() const
 {

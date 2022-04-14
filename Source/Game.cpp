@@ -43,7 +43,7 @@ Game::Game()
 {
 
     for (int i = 0; i < kNumRows; i++) {
-        mRows[i] = new RowManager(i, i % 2 == 0 ? (Direction)LEFT : (Direction)RIGHT);
+        mRows[i] = new RowManager(i, i % 3 == 0 ? (Direction)LEFT : (Direction)RIGHT);
     }
 }
 
@@ -165,6 +165,11 @@ void Game::Update(const float& deltaTime) {
 
     for (int i = 0; i < kNumRows; i++) {
         mRows[i]->Update();
+        if (mRows[i]->GetSpawnLocation().y == mSnake->GetHead()->GetPosition().y) {
+            if (mRows[i]->IsColliding(mSnake->GetHead()->GetPosition())) {
+                mSnake->SetIsDead(true);
+            }
+        }
     }
 
     //Check if it died

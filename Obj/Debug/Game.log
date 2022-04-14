@@ -1,26 +1,18 @@
-﻿  RowManager.cpp
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\ObstaclePool.h(11,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(7,1): warning C4005: 'HALF_SIZE': macro redefinition
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\Include\Obstacle.h(8): message : see previous definition of 'HALF_SIZE'
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(15,120): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(15,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Game.cpp
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\ObstaclePool.h(11,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(7,1): warning C4005: 'HALF_SIZE': macro redefinition
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\Include\Obstacle.h(8): message : see previous definition of 'HALF_SIZE'
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(15,120): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(15,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Game.cpp
+C:\Users\Shatru\Documents\OPP_Frogger\Include\Obstacle.h(54,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Shatru\Documents\OPP_Frogger\ObstaclePool.h(11,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Shatru\Documents\OPP_Frogger\RowManager.h(7,1): warning C4005: 'HALF_SIZE': macro redefinition
+C:\Users\Shatru\Documents\OPP_Frogger\Include\Obstacle.h(10): message : see previous definition of 'HALF_SIZE'
   Main.cpp
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\ObstaclePool.h(11,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(7,1): warning C4005: 'HALF_SIZE': macro redefinition
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\Include\Obstacle.h(8): message : see previous definition of 'HALF_SIZE'
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(15,120): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(15,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Shatru\Documents\OPP_Frogger\Include\Obstacle.h(54,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Shatru\Documents\OPP_Frogger\ObstaclePool.h(11,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Shatru\Documents\OPP_Frogger\RowManager.h(7,1): warning C4005: 'HALF_SIZE': macro redefinition
+C:\Users\Shatru\Documents\OPP_Frogger\Include\Obstacle.h(10): message : see previous definition of 'HALF_SIZE'
   Snake.cpp
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\ObstaclePool.h(11,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(7,1): warning C4005: 'HALF_SIZE': macro redefinition
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\Include\Obstacle.h(8): message : see previous definition of 'HALF_SIZE'
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(15,120): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\RowManager.h(15,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Shatru\Documents\OPP_Frogger\Include\Obstacle.h(54,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Shatru\Documents\OPP_Frogger\ObstaclePool.h(11,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Shatru\Documents\OPP_Frogger\RowManager.h(7,1): warning C4005: 'HALF_SIZE': macro redefinition
+C:\Users\Shatru\Documents\OPP_Frogger\Include\Obstacle.h(10): message : see previous definition of 'HALF_SIZE'
   Generating Code...
-  Game.vcxproj -> C:\Users\pg22shatrujit\source\repos\OOP_Final_Assignment\bin\Game.exe
+EngineX_d.lib(Engine.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineX_d.lib(Engine.obj)' or at 'C:\Users\Shatru\Documents\OPP_Frogger\bin\EngineX.pdb'; linking object as if no debug info
+  Game.vcxproj -> C:\Users\Shatru\Documents\OPP_Frogger\bin\Game.exe

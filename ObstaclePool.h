@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
-#include <time.h>
 #include "ObstacleFactory.h"
 #define FACTORY ObstacleFactory::GetFactoryInstance()
+#define SPAWN_CHANCE 25
 
 class ObstaclePool
 {
@@ -33,10 +33,12 @@ public:
     }
 
     void Spawn(exVector2 spawnLoc, Direction row) {
-        if (rand() % 100 < 80) {
+        if (rand() % 100 < SPAWN_CHANCE) {
             for (int i = 0; i < mPoolSize; i++) {
-                if (mPool[i] == nullptr)
-                   mPool[i] = FACTORY->GetObstacle(row, spawnLoc);
+                if (mPool[i] == nullptr) {
+                    mPool[i] = FACTORY->GetObstacle(row, spawnLoc);
+                    break;
+                }
             }
         }
     }
@@ -63,7 +65,7 @@ public:
         bool isOccupying = false;
         for (int i = 0; i < mPoolSize; i++) {
             if (mPool[i] != nullptr) {
-                isOccupying |= mPool[i]->IsOccupying(SpawnLocation);
+                isOccupying = isOccupying || mPool[i]->IsOccupying(SpawnLocation);
             }
         }
 

@@ -5,10 +5,14 @@
 #include "EngineInterface.h"
 #include "ObstacleFactory.h"
 
+#include <stdlib.h>
+#include <time.h>
 #define HALF_SIZE 20
 #define SCREEN_WIDTH 800
 
-#define BLACK exColor(0, 0, 0)
+#define RED exColor(255, 0, 0)
+#define BLUE exColor(0, 0, 255)
+#define GREEN exColor(0, 255, 0)
 
 class Obstacle
 {
@@ -33,9 +37,8 @@ public:
 	}
 
 	void Render(exEngineInterface* engine) {
-		exVector2 p1 = exVector2(mLocation.x - HALF_SIZE, mLocation.y - HALF_SIZE);
-		exVector2 p2 = exVector2(mLocation.x + HALF_SIZE, mLocation.y + HALF_SIZE);
-		engine->DrawBox(p1, p2, BLACK, 1);
+		exVector2 center = exVector2(mLocation.x, mLocation.y);
+		engine->DrawCircle(center, HALF_SIZE, mColor, 1);
 	}
 
 	bool IsOccupying(exVector2 loc) {
@@ -48,13 +51,18 @@ public:
 
 private:
 	Obstacle(Direction direction, exVector2 location) {
+		srand(time(NULL));
 		mDirection = direction;
 		mLocation = location;
 		mNumTiles = 1;
+		mColor = colorArray[rand() % 3];
 	}
+
+	const exColor colorArray[3] = {RED, GREEN, BLUE};
 
 	Direction mDirection;
 	exVector2 mLocation;
+	exColor mColor;
 	int mNumTiles;
 };
 
