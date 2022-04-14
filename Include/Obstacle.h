@@ -20,43 +20,18 @@ class Obstacle
 public:
 	Obstacle() = delete;
 
-	~Obstacle() {
+	~Obstacle();
 
-	}
+	void Update(); //Update position
 
-	void Update() {
-		switch (mDirection)
-		{
-		case Direction::LEFT:
-			mLocation = mLocation + exVector2(-2 * HALF_SIZE, 0);
-			break;
-		case Direction::RIGHT:
-			mLocation = mLocation + exVector2(2 * HALF_SIZE, 0);
-			break;
-		}
-	}
+	void Render(exEngineInterface* engine); //Render at current position
 
-	void Render(exEngineInterface* engine) {
-		exVector2 center = exVector2(mLocation.x, mLocation.y);
-		engine->DrawCircle(center, HALF_SIZE, mColor, 1);
-	}
+	bool IsOccupying(exVector2 loc); //Check if a vector is inside the  bounds
 
-	bool IsOccupying(exVector2 loc) {
-		return loc.x <= mLocation.x + HALF_SIZE && loc.x >= mLocation.x - HALF_SIZE;
-	}
-
-	bool IsOffScreen() {
-		return mLocation.x >= SCREEN_WIDTH + HALF_SIZE || mLocation.x <= -HALF_SIZE;
-	}
+	bool IsOffScreen(); //Check is it's off screen
 
 private:
-	Obstacle(Direction direction, exVector2 location) {
-		srand(time(NULL));
-		mDirection = direction;
-		mLocation = location;
-		mNumTiles = 1;
-		mColor = colorArray[rand() % 3];
-	}
+	Obstacle(Direction direction, exVector2 location);
 
 	const exColor colorArray[3] = {RED, GREEN, BLUE};
 

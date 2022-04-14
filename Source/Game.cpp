@@ -12,13 +12,12 @@
 #define RIGHT 8
 #define RESTART 16
 
-#define BLACK exColor(0, 0, 0)
-
 #define RIGHT_BOUND 800
 #define BOTTOM_BOUND 600
 
 Game* Game::sInstance = nullptr;
 
+//Get Singleton instance
 Game* Game::GetInstance()
 {
     if (sInstance == nullptr)
@@ -28,28 +27,25 @@ Game* Game::GetInstance()
     return sInstance;
 }
 
+//Initalize member variables and row managers
 Game::Game() 
     : mEngine(nullptr)
     , mFontID(-1)
     , mWindowName("Game")
-    , mSnake(Snake::GetInstance())
-    , mJointSize(Snake::GetJointSize())
-    , mFoodPosition(exVector2())
+    , mPlayer(Player::GetInstance())
+    , mJointSize(Player::GetHalfSize())
     , mTimeFromUpdate(0.0f)
-    , mIsFoodDisplayed(false)
     , mIsGameOver(false)
     , mScore(0)
-    , mUpdate(false)
+    , move(false)
 {
 
     for (int i = 0; i < kNumRows; i++) {
-        mRows[i] = new RowManager(i, i % 3 == 0 ? (Direction)LEFT : (Direction)RIGHT);
+        mRows[i] = new RowManager(i, i % 2 == 0 ? (Direction)LEFT : (Direction)RIGHT);
     }
 }
 
-Game::~Game()
-{
-}
+Game::~Game() {}
 
 void Game::Initialize(exEngineInterface* engine)
 {
@@ -116,36 +112,39 @@ void Game::Run(float deltaTime)
 void Game::RestartGame()
 {
     mIsGameOver = false;
-    Snake::mDelete();
-    mSnake = Snake::GetInstance();
+    Player::mDelete();
+    mPlayer = Player::GetInstance();
     mScore = 0;
+    move = false;
+    GoingDown = false;
 }
 
 
 void Game::ProcessInput(const float& deltaTime)
 {
-    //Snake movement input is only valid if game isn't over
+    //Movement input is only valid if game isn't over
     if (!mIsGameOver) {
         // Change scene based on input
         if (mInput) {
-            mUpdate = true;
+            move = true;
         }
         if (mInput & UP)
         {
-            mSnake->SetDirection((Direction)UP);
+            mPlayer->SetDirection((Direction)UP);
+            
         }
         else if (mInput & DOWN)
         {
-            mSnake->SetDirection((Direction)DOWN);
+            mPlayer->SetDirection((Direction)DOWN);
         }
 
         if (mInput & LEFT)
         {
-            mSnake->SetDirection((Direction)LEFT);
+            mPlayer->SetDirection((Direction)LEFT);
         }
         else if (mInput & RIGHT)
         {
-            mSnake->SetDirection((Direction)RIGHT);
+            mPlayer->SetDirection((Direction)RIGHT);
         }
     }
 
@@ -157,49 +156,46 @@ void Game::ProcessInput(const float& deltaTime)
 
 void Game::Update(const float& deltaTime) {
 
-    if (mUpdate) {
-        //Update snake's position and direction
-        mSnake->Update();
-        mUpdate = false;
+    if (move) {
+        //Update player position and direction
+        mPlayer->Update();
+        move = false;
     }
 
     for (int i = 0; i < kNumRows; i++) {
         mRows[i]->Update();
-        if (mRows[i]->GetSpawnLocation().y == mSnake->GetHead()->GetPosition().y) {
-            if (mRows[i]->IsColliding(mSnake->GetHead()->GetPosition())) {
-                mSnake->SetIsDead(true);
+        if (mRows[i]->GetSpawnLocation().y == mPlayer->GetPosition().y) {
+            if (mRows[i]->IsColliding(mPlayer->GetPosition())) {
+                mPlayer->SetIsDead(true);
             }
         }
     }
 
-    //Check if it died
-    mIsGameOver = mSnake->GetIsDead();
-}
+    //Check if player has reached the top of the screen and increase score, score will only increase at the top once the player goes to the bottom and comes back up
+    if (mPlayer->GetPosition().y == Player::GetHalfSize() && GoingDown == false) {
+        mScore += 1;
+        GoingDown = true;
+    }
 
-//Get a random coordinate between 0 and bound
-float Game::GetRandomCoordinate(const float& bound) const
-{   
-    //Divide bound by 2*jointsize to snap to a grid based of joint size, then generate a number from 2*jointsize to bound
-    return (rand() % (int)(bound / (mJointSize * 2) - 1) + 1) * mJointSize * 2;
+    //check if player has reached the bottom of the screen and increase score only if they have made it to the top first
+    if (mPlayer->GetPosition().y == 600 - Player::GetHalfSize() && GoingDown == true) {
+        mScore += 1;
+        GoingDown = false;
+    }
+
+    //Check if it died
+    mIsGameOver = mPlayer->GetIsDead();
 }
 
 void Game::Render(const float& deltaTime) const
 {
+    //Render each row
     for (int i = 0; i < kNumRows; i++) {
         mRows[i]->Render(mEngine);
     }
 
-    //Iterate over the snake's joints and draw them
-    SnakeJoint* temp = mSnake->GetHead();
-    while (temp != nullptr) {
-
-        exVector2 currentPosition = temp->GetPosition();
-        exVector2 p1 = exVector2(currentPosition.x - mJointSize, currentPosition.y - mJointSize);
-        exVector2 p2 = exVector2(currentPosition.x + mJointSize, currentPosition.y + mJointSize);
-
-        mEngine->DrawBox(p1, p2, BLACK, 1);
-        temp = temp->next;
-    }
+    //Render the player
+    mPlayer->Render(mEngine);
 
     mEngine->DrawText(mFontID, mScorePosition, std::to_string(mScore).c_str(), exColor(0, 0, 0), 10);
 }

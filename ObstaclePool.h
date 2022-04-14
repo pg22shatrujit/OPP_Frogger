@@ -7,70 +7,21 @@
 class ObstaclePool
 {
 public:
-    ObstaclePool() {
-        srand(time(NULL));
-        mPoolSize = 0;
-    }
+    ObstaclePool();
 
-    void SetPoolSize(int poolSize) {
-        mPoolSize = poolSize;
-        mPool.resize(poolSize);
-    }
+    ~ObstaclePool();
 
-    void Update(exVector2 spawnLoc, Direction row) {
-        UpdatePositions();
-        if (!IsOccupied(spawnLoc)) {
-            Spawn(spawnLoc, row);
-        }
-    }
+    void SetPoolSize(int poolSize); //Reserves memory and cache size
 
-    void Render(exEngineInterface* engine) {
-        for (int i = 0; i < mPoolSize; i++) {
-            if (mPool[i] != nullptr) {
-                mPool[i]->Render(engine);
-            }
-        }
-    }
+    void Update(exVector2 spawnLoc, Direction row); //Update every obstacle in the pool
 
-    void Spawn(exVector2 spawnLoc, Direction row) {
-        if (rand() % 100 < SPAWN_CHANCE) {
-            for (int i = 0; i < mPoolSize; i++) {
-                if (mPool[i] == nullptr) {
-                    mPool[i] = FACTORY->GetObstacle(row, spawnLoc);
-                    break;
-                }
-            }
-        }
-    }
+    void Render(exEngineInterface* engine); //Render every obstacle
 
-    void UpdatePositions() {
-        for (int i = 0; i < mPoolSize; i++) {
-            if (mPool[i] != nullptr) {
-                mPool[i]->Update();
+    void Spawn(exVector2 spawnLoc, Direction row); //Spawn a new obstacle (Randomized chance)
 
-                if (mPool[i]->IsOffScreen()) {
-                    delete mPool[i];
-                    mPool[i] = nullptr;
-                }
-            }
-        }
-    }
+    void UpdatePositions(); //Update obstacle positions
 
-    Obstacle* GetObstacle(int index) const
-    {
-        return mPool[index];
-    }
-
-    bool IsOccupied(exVector2 SpawnLocation) {
-        bool isOccupying = false;
-        for (int i = 0; i < mPoolSize; i++) {
-            if (mPool[i] != nullptr) {
-                isOccupying = isOccupying || mPool[i]->IsOccupying(SpawnLocation);
-            }
-        }
-
-        return isOccupying;
-    }
+    bool IsOccupied(exVector2 location); //Check if an obstacle occupies a location
 
 private:
 

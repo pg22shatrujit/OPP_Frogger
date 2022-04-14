@@ -2,7 +2,7 @@
 
 #include "GameInterface.h"
 #include "EngineTypes.h"
-#include "Snake.h"
+#include "Player.h"
 #include "../RowManager.h"
 #include <time.h>
 #include <string>
@@ -27,13 +27,14 @@ public:
 
     virtual void        Run(float deltaTime);
 
+    bool GoingDown = false;
+
 private:
     Game();
     
     void                ProcessInput(const float& deltaTime);
     void                Render(const float& deltaTime) const;
     void                Update(const float& deltaTime);
-    float               GetRandomCoordinate(const float& bound) const; //Get a random coordinate between 0 and bound
     void                RestartGame(); //Restart the game at the player's input
     
     static Game*        sInstance;
@@ -46,22 +47,18 @@ private:
     exVector2           mScorePosition; //Location where the score gets printed
     int                 mInput; //Tracks last user input
     int                 mScore; //Tracks the game score
-    Snake*              mSnake; //Reference to the snake
+    Player*             mPlayer; //Reference to the player
     float               mJointSize; //Size of each joint of the snake (From the Snake's GetJointSize())
-    exVector2           mFoodPosition; //Current location of food for the snake
     float               mTimeFromUpdate; //Time since last update, so that we can update at intervals we define
-    bool                mIsFoodDisplayed; //Whether the food is being displayed
     bool                mIsGameOver; //Whether the game is over or not
-    const float         kUpdateTime = 0.25f; //Time after which we update
+    bool                move; //Whether the player should move in the next update cycle
 
-    bool                mUpdate;
-
-    RowManager*          mRows[NUM_ROWS];
-    static const int    kNumRows = NUM_ROWS;
+    RowManager*         mRows[NUM_ROWS]; //Manager for each row of the game
+    static const int    kNumRows = NUM_ROWS; //Precalculate number of rows for easier updates
+    const float         kUpdateTime = 0.35f; //Time after which the frames should update
 
     //Const text to display messages
     const std::string   kGameOverText = "Your final score is: ";
     const std::string   kRestartText = "Press R to restart.";
 
 };
-

@@ -6,28 +6,16 @@ class ObstacleFactory
 {
 public:
 
-    ~ObstacleFactory() {
-        if (sInstance != nullptr)
-            delete sInstance;
-    }
+    //Delete instance if it exists
+    ~ObstacleFactory();
 
-    static ObstacleFactory* GetFactoryInstance()
-    {
-        if (sInstance == nullptr)// checking if we already have a Instance
-        {
-            sInstance = new ObstacleFactory();// create a new instance and store it in sInstance;
-        }
-        return sInstance;
+    //Get the factory instance (create if it doesn't exist)
+    static ObstacleFactory* GetFactoryInstance();
 
-    }
-
-    Obstacle* GetObstacle(Direction dir, exVector2 spawnLoc)// factory function to generate new instance of Cryptography class and return it
-    {
-        return new Obstacle(dir, spawnLoc);
-    }
+    //Generate a new obstacle with direction and location
+    Obstacle* GetObstacle(Direction dir, exVector2 spawnLoc);
 
 private:
-
 
     ObstacleFactory();
 

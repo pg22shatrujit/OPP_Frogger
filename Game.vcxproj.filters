@@ -18,10 +18,7 @@
     <ClInclude Include="Include\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Snake.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\SnakeJoint.h">
+    <ClInclude Include="Include\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\Obstacle.h">
@@ -47,10 +44,7 @@
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Snake.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SnakeJoint.cpp">
+    <ClCompile Include="Source\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Obstacle.cpp">

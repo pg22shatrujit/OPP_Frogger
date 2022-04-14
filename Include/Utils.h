@@ -1,4 +1,5 @@
 #pragma once
+#include "EngineTypes.h"
 
 //Enum used to type th direction the snake is going in
 enum class Direction {

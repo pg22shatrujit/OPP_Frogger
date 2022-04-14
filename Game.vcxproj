@@ -153,8 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Include\Game.h" />
     <ClInclude Include="Include\Obstacle.h" />
-    <ClInclude Include="Include\Snake.h" />
-    <ClInclude Include="Include\SnakeJoint.h" />
+    <ClInclude Include="Include\Player.h" />
     <ClInclude Include="Include\Utils.h" />
     <ClInclude Include="ObstacleFactory.h" />
     <ClInclude Include="ObstaclePool.h" />
@@ -167,8 +166,7 @@
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Obstacle.cpp" />
-    <ClCompile Include="Source\Snake.cpp" />
-    <ClCompile Include="Source\SnakeJoint.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
