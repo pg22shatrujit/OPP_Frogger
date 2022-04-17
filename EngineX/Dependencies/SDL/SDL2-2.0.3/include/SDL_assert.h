@@ -112,7 +112,7 @@ typedef struct SDL_assert_data
     const char *filename;
     int linenum;
     const char *function;
-    const struct SDL_assert_data *next;
+    const struct SDL_assert_data *mNext;
 } SDL_assert_data;
 
 #if (SDL_ASSERT_LEVEL > 0)

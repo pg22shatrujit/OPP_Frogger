@@ -1,9 +1,11 @@
+//Copyright (C) 2022 Shatrujit Aditya Kumar & Andre Dupuis, All Rights Reserved
 #pragma once
 
 #include "GameInterface.h"
 #include "EngineTypes.h"
 #include "Player.h"
 #include "../RowManager.h"
+#include "../HighScores.h"
 #include <time.h>
 #include <string>
 
@@ -33,9 +35,10 @@ private:
     Game();
     
     void                ProcessInput(const float& deltaTime);
-    void                Render(const float& deltaTime) const;
+    void                Render(const float& deltaTime);
     void                Update(const float& deltaTime);
     void                RestartGame(); //Restart the game at the player's input
+    void                RenderScores();
     
     static Game*        sInstance;
     
@@ -44,21 +47,29 @@ private:
     int                 mFontID;
     const char*         mWindowName;
 
-    exVector2           mScorePosition; //Location where the score gets printed
+    static exVector2    mScorePosition; //Location where the score gets printed
+    static exVector2    mHighScorePosition; //Location where the score gets printed
+    static exVector2    kLineHeight; //Line offset when drawing text
+    static exVector2    kColumnWidth; //Column offset when drawing high scores
     int                 mInput; //Tracks last user input
     int                 mScore; //Tracks the game score
     Player*             mPlayer; //Reference to the player
     float               mJointSize; //Size of each joint of the snake (From the Snake's GetJointSize())
     float               mTimeFromUpdate; //Time since last update, so that we can update at intervals we define
     bool                mIsGameOver; //Whether the game is over or not
+    bool                mShouldAddHighScore; //Whether the player should be added to the high scores
+    bool                mAddedHighScore; //Whether the player has been added to the high scores
     bool                move; //Whether the player should move in the next update cycle
 
     RowManager*         mRows[NUM_ROWS]; //Manager for each row of the game
     static const int    kNumRows = NUM_ROWS; //Precalculate number of rows for easier updates
     const float         kUpdateTime = 0.35f; //Time after which the frames should update
 
+    HighScores*         mHighScoreManager; //Maintain a linked list of high scores
+
     //Const text to display messages
     const std::string   kGameOverText = "Your final score is: ";
     const std::string   kRestartText = "Press R to restart.";
+    const std::string   kEnterNameText = "Enter your name: ";
 
 };

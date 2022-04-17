@@ -1,3 +1,4 @@
+//Copyright (C) 2022 Shatrujit Aditya Kumar & Andre Dupuis, All Rights Reserved
 #pragma once
 #include "Obstacle.h"
 #include "Utils.h"

@@ -26,6 +26,16 @@ typedef unsigned char uchar;
 			return exVector2(this->x + Other.x, this->y + Other.y);
 		}
 
+		exVector2 operator*(const exVector2& Other)
+		{
+			return exVector2(this->x * Other.x, this->y * Other.y);
+		}
+
+		exVector2 operator*(const int& Other)
+		{
+			return exVector2(this->x * Other, this->y * Other);
+		}
+
 		bool operator==(const exVector2& Other)
 		{
 			return this->x == Other.x && this->y == Other.y;

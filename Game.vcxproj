@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="HighScoreNode.h" />
+    <ClInclude Include="HighScores.h" />
     <ClInclude Include="Include\Game.h" />
     <ClInclude Include="Include\Obstacle.h" />
     <ClInclude Include="Include\Player.h" />
@@ -160,6 +162,8 @@
     <ClInclude Include="RowManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="HighScoreNode.cpp" />
+    <ClCompile Include="HighScores.cpp" />
     <ClCompile Include="ObstacleFactory.cpp" />
     <ClCompile Include="ObstaclePool.cpp" />
     <ClCompile Include="RowManager.cpp" />

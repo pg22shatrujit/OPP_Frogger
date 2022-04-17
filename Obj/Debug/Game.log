@@ -1,11 +1,5 @@
 ﻿  Game.cpp
-C:\Users\Shatru\Documents\OPP_Frogger\RowManager.h(6,1): warning C4005: 'HALF_SIZE': macro redefinition
-C:\Users\Shatru\Documents\OPP_Frogger\Include\Obstacle.h(10): message : see previous definition of 'HALF_SIZE'
-  Main.cpp
-C:\Users\Shatru\Documents\OPP_Frogger\RowManager.h(6,1): warning C4005: 'HALF_SIZE': macro redefinition
-C:\Users\Shatru\Documents\OPP_Frogger\Include\Obstacle.h(10): message : see previous definition of 'HALF_SIZE'
-  Player.cpp
-C:\Users\Shatru\Documents\OPP_Frogger\RowManager.h(6,1): warning C4005: 'HALF_SIZE': macro redefinition
-C:\Users\Shatru\Documents\OPP_Frogger\Include\Obstacle.h(10): message : see previous definition of 'HALF_SIZE'
-  Generating Code...
+EngineX_d.lib(Engine.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineX_d.lib(Engine.obj)' or at 'C:\Users\Shatru\Documents\OPP_Frogger\bin\EngineX.pdb'; linking object as if no debug info
+EngineX_d.lib(RenderPacket.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineX_d.lib(RenderPacket.obj)' or at 'C:\Users\Shatru\Documents\OPP_Frogger\bin\EngineX.pdb'; linking object as if no debug info
+EngineX_d.lib(System.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineX_d.lib(System.obj)' or at 'C:\Users\Shatru\Documents\OPP_Frogger\bin\EngineX.pdb'; linking object as if no debug info
   Game.vcxproj -> C:\Users\Shatru\Documents\OPP_Frogger\bin\Game.exe

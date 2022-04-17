@@ -1,3 +1,4 @@
+//Copyright (C) 2022 Shatrujit Aditya Kumar & Andre Dupuis, All Rights Reserved
 #include "Game.h"
 #include "EngineInterface.h"
 

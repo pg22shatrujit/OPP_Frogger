@@ -1,3 +1,4 @@
+//Copyright (C) 2022 Shatrujit Aditya Kumar & Andre Dupuis, All Rights Reserved
 #include "Player.h"
 #include "Game.h"
 

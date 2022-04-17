@@ -1,9 +1,9 @@
+//Copyright (C) 2022 Shatrujit Aditya Kumar & Andre Dupuis, All Rights Reserved
 #pragma once
 #include "Utils.h"
 #include "ObstaclePool.h"
-#define POOL_SIZE 2
+#define POOL_SIZE 5
 #define ROW_HEIGHT 40
-#define HALF_SIZE ROW_HEIGHT/2
 
 class RowManager
 {
