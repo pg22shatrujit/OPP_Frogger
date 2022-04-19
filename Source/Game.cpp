@@ -48,6 +48,7 @@ Game::Game()
     , mAddedHighScore(false)
     , mShouldAddHighScore(false)
     , mInput(0)
+    , mNextCharacter(nullptr)
 {
 
     for (int i = 0; i < kNumRows; i++) {
@@ -84,13 +85,33 @@ void Game::OnEventsConsumed()
     // Grab inputs
     mInput = 0;
     int nKeys = 0;
+    char* getChar = nullptr;
     const Uint8* pState = SDL_GetKeyboardState(&nKeys);
+    
+    //Check which states are set to true and get the scancode name
+    for (int i = 0; i < nKeys; i++) {
+        if (pState[i] != 0) {
+            getChar = (char*)SDL_GetScancodeName(SDL_Scancode(i));
+            
+            //If it's length is one (So a single character and not space or escape or something like that), break
+            if (strlen(getChar) == 1)
+                break;
+
+            //Otherwise reset to null
+            else getChar = nullptr;
+        }
+    }
+
+    //If it's not null and length is one, store the value for updating our high score name
+    if (getChar != nullptr && strlen(getChar) == 1) {
+        mNextCharacter = getChar;
+    }
 
     mInput |= pState[SDL_SCANCODE_UP];
     mInput |= pState[SDL_SCANCODE_DOWN] << 1;
     mInput |= pState[SDL_SCANCODE_LEFT] << 2;
     mInput |= pState[SDL_SCANCODE_RIGHT] << 3;
-    mInput |= pState[SDL_SCANCODE_R] << 4; //Check for restart
+    mInput |= pState[SDL_SCANCODE_ESCAPE] << 4; //Check for restart
 }
 
 void Game::Run(float deltaTime)
@@ -119,36 +140,57 @@ void Game::RestartGame()
     mAddedHighScore = false;
 }
 
-void Game::RenderScores()
+void Game::RenderScores(const float& deltaTime)
 {
     //Check if we should and have added the high score
     if (!mShouldAddHighScore && !mAddedHighScore) {
         mShouldAddHighScore = mHighScoreManager->ShouldAddScore(mScore);
+
+        //Reset highscore name so we don't get the last entered name again
+        mHighScoreName = "";
+
+        //Reset this so we don't get some random character that's been held from before this loop starts
+        mNextCharacter = nullptr;
     }
 
-    //If we should but we haven't, get the player's name and truncate to three characters
+    //If we should but we haven't, get three characters from the user for the player's name
     if (mShouldAddHighScore && !mAddedHighScore) {
-        std::string name;
-        std::cout << kEnterNameText;
-        std::cin >> name;
-        name = name.substr(0, 3);
-        mHighScoreManager->Add(name, mScore);
-        mAddedHighScore = true;
+        mEngine->DrawText(mFontID, mHighScorePosition, kEnterNameText.c_str(), exColor(0, 0, 0), 10);
+        mEngine->DrawText(mFontID, mHighScorePosition + kLineHeight, mHighScoreName.c_str(), exColor(0, 0, 0), 10);
+
+        //Update only after our set update time
+        if (!mIsGameOver || mTimeFromUpdate < kUpdateTime) return;
+        mTimeFromUpdate = 0.0f;
+
+        //If a character has been entered, add it to the name string
+        if (mNextCharacter != nullptr) {
+            mHighScoreName += mNextCharacter;
+        }
+
+        //Reset last character entered to nullptr so we don't get the same character again
+        mNextCharacter = nullptr;
+
+        //If the length is 3, create a new highscore with the name and set highscore added to true
+        if (mHighScoreName.length() >= MAX_NAME_LENGTH) {
+            mHighScoreManager->Add(mHighScoreName, mScore);
+            mAddedHighScore = true;
+        }
     }
+    else {
+        //Draw the text for high scores
+        mEngine->DrawText(mFontID, mHighScorePosition, mHighScoreManager->kTitleText.c_str(), exColor(0, 0, 0), 10);
+        mEngine->DrawText(mFontID, mHighScorePosition + kLineHeight, mHighScoreManager->kNameText.c_str(), exColor(0, 0, 0), 10);
+        mEngine->DrawText(mFontID, mHighScorePosition + kLineHeight + kColumnWidth, mHighScoreManager->kPointText.c_str(), exColor(0, 0, 0), 10);
 
-    //Draw the text for high scores
-    mEngine->DrawText(mFontID, mHighScorePosition, mHighScoreManager->kTitleText.c_str(), exColor(0, 0, 0), 10);
-    mEngine->DrawText(mFontID, mHighScorePosition + kLineHeight, mHighScoreManager->kNameText.c_str(), exColor(0, 0, 0), 10);
-    mEngine->DrawText(mFontID, mHighScorePosition + kLineHeight + kColumnWidth, mHighScoreManager->kPointText.c_str(), exColor(0, 0, 0), 10);
-
-    //Iterate through the linked list and print every score
-    HighScoreNode* currentScore = mHighScoreManager->GetHead();
-    int i = 2; //Offset so lines don't overlap
-    while (currentScore != nullptr) {
-        mEngine->DrawText(mFontID, mHighScorePosition + kLineHeight * i, currentScore->GetName().c_str(), exColor(0, 0, 0), 10);
-        mEngine->DrawText(mFontID, mHighScorePosition + kLineHeight * i + kColumnWidth, std::to_string(currentScore->GetScore()).c_str(), exColor(0, 0, 0), 10);
-        i++;
-        currentScore = currentScore->GetNext();
+        //Iterate through the linked list and print every score
+        HighScoreNode* currentScore = mHighScoreManager->GetHead();
+        int i = 2; //Offset so lines don't overlap
+        while (currentScore != nullptr) {
+            mEngine->DrawText(mFontID, mHighScorePosition + kLineHeight * i, currentScore->GetName().c_str(), exColor(0, 0, 0), 10);
+            mEngine->DrawText(mFontID, mHighScorePosition + kLineHeight * i + kColumnWidth, std::to_string(currentScore->GetScore()).c_str(), exColor(0, 0, 0), 10);
+            i++;
+            currentScore = currentScore->GetNext();
+        }
     }
 }
 
@@ -237,7 +279,7 @@ void Game::Render(const float& deltaTime)
         mEngine->DrawText(mFontID, mScorePosition, (kGameOverText + std::to_string(mScore)).c_str(), exColor(0, 0, 0), 10);
         mEngine->DrawText(mFontID, mScorePosition + kLineHeight, kRestartText.c_str(), exColor(0, 0, 0), 10);
 
-        RenderScores();
+        RenderScores(deltaTime);
     }
     //Otherwise, render the game
     else {

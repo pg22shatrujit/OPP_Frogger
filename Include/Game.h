@@ -12,6 +12,7 @@
 #define SCREEN_HEIGHT 600
 #define ROW_HEIGHT 40
 #define NUM_ROWS (int)(SCREEN_HEIGHT/ROW_HEIGHT - 2)
+#define MAX_NAME_LENGTH 3
 
 class Game : public exGameInterface
 {
@@ -38,7 +39,7 @@ private:
     void                Render(const float& deltaTime);
     void                Update(const float& deltaTime);
     void                RestartGame(); //Restart the game at the player's input
-    void                RenderScores();
+    void                RenderScores(const float& deltaTime);
     
     static Game*        sInstance;
     
@@ -66,10 +67,12 @@ private:
     const float         kUpdateTime = 0.35f; //Time after which the frames should update
 
     HighScores*         mHighScoreManager; //Maintain a linked list of high scores
+    char*               mNextCharacter; //Cache the last single character entered by the user
+    std::string         mHighScoreName; //Cache a three character name to set in the highscore list
 
     //Const text to display messages
     const std::string   kGameOverText = "Your final score is: ";
-    const std::string   kRestartText = "Press R to restart.";
+    const std::string   kRestartText = "Press Esc to restart.";
     const std::string   kEnterNameText = "Enter your name: ";
 
 };

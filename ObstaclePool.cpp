@@ -47,7 +47,8 @@ void ObstaclePool::Render(exEngineInterface* engine)
 //Spawns an obstacle with % chance if spawn location is unoccupied
 void ObstaclePool::Spawn(exVector2 spawnLoc, Direction row)
 {
-    if (rand() % 100 < SPAWN_CHANCE) {
+    int i = rand() % 100;
+    if (i > 100 - SPAWN_CHANCE) {
         for (int i = 0; i < mPoolSize; i++) {
             if (mPool[i] == nullptr) {
                 mPool[i] = FACTORY->GetObstacle(row, spawnLoc);
