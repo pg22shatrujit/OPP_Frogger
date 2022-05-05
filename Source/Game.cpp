@@ -56,7 +56,18 @@ Game::Game()
     }
 }
 
-Game::~Game() {}
+Game::~Game() {
+
+    for (int i = 0; i < kNumRows; i++) {
+        if (mRows[i] != nullptr) {
+            delete mRows[i];
+        }
+    }
+
+    if (sInstance != nullptr) {
+        delete sInstance;
+    }
+}
 
 void Game::Initialize(exEngineInterface* engine)
 {
@@ -133,6 +144,7 @@ void Game::RestartGame()
     mInput = 0;
     Player::mDelete();
     mPlayer = Player::GetInstance();
+    ResetRowManagers();
     mScore = 0;
     move = false;
     GoingDown = false;
@@ -192,6 +204,10 @@ void Game::RenderScores(const float& deltaTime)
             currentScore = currentScore->GetNext();
         }
     }
+}
+
+void Game::ResetRowManagers()
+{
 }
 
 

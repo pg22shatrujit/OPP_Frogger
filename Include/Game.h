@@ -40,6 +40,7 @@ private:
     void                Update(const float& deltaTime);
     void                RestartGame(); //Restart the game at the player's input
     void                RenderScores(const float& deltaTime);
+    void                ResetRowManagers(); //Delete row managers
     
     static Game*        sInstance;
     

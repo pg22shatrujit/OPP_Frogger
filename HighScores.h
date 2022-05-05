@@ -28,4 +28,3 @@ private:
 	HighScoreNode* mHead; //Head of the linked list
 	static HighScores* sInstance; //Singleton instance
 };
-
