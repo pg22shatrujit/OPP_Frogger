@@ -22,6 +22,8 @@ public:
 
     void UpdatePositions(); //Update obstacle positions
 
+    void ResetPool(); //Empty the pool
+
     bool IsOccupied(exVector2 location); //Check if an obstacle occupies a location
 
 private:

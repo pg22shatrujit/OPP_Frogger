@@ -19,6 +19,8 @@ public:
 
 	bool IsColliding(exVector2 playerPosition);
 
+	void ResetObstacles();
+
 private:
 	Direction mRowDir;
 	exVector2 mSpawnLocation;

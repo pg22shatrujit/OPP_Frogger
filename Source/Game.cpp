@@ -208,6 +208,11 @@ void Game::RenderScores(const float& deltaTime)
 
 void Game::ResetRowManagers()
 {
+    for (int i = 0; i < kNumRows; i++) {
+        if (mRows[i] != nullptr) {
+            mRows[i]->ResetObstacles();
+        }
+    }
 }
 
 

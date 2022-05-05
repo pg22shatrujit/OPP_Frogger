@@ -29,3 +29,8 @@ exVector2 RowManager::GetSpawnLocation() {
 bool RowManager::IsColliding(exVector2 playerPosition) {
 	return mObstaclePool.IsOccupied(playerPosition);
 }
+
+void RowManager::ResetObstacles()
+{
+	mObstaclePool.ResetPool();
+}

@@ -10,12 +10,7 @@ ObstaclePool::ObstaclePool()
 //Deletes any stray pointers on destruction
 ObstaclePool::~ObstaclePool()
 {
-    for (int i = 0; i < mPoolSize; i++) {
-        if (mPool[i] != nullptr) {
-            delete mPool[i];
-            mPool[i] = nullptr;
-        }
-    }
+    ResetPool();
 }
 
 //Caches size and resizes vector
@@ -69,6 +64,16 @@ void ObstaclePool::UpdatePositions()
                 delete mPool[i];
                 mPool[i] = nullptr;
             }
+        }
+    }
+}
+
+void ObstaclePool::ResetPool()
+{
+    for (int i = 0; i < mPoolSize; i++) {
+        if (mPool[i] != nullptr) {
+            delete mPool[i];
+            mPool[i] = nullptr;
         }
     }
 }

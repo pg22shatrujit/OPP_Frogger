@@ -1,2 +1,8 @@
-﻿  Game.cpp
+﻿  ObstaclePool.cpp
+C:\Users\Public\Repos\OPP_Frogger\ObstaclePool.cpp(6,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  RowManager.cpp
+  Game.cpp
+  Main.cpp
+  Player.cpp
+  Generating Code...
   Game.vcxproj -> C:\Users\Public\Repos\OPP_Frogger\bin\Game.exe
